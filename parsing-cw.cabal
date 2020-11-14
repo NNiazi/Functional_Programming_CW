@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5feb7143aeb55cfabab365a4a59fbcb339671c6b6a4dfdbab33fb159d050a5ae
+-- hash: 82da057458c3f4564e2d115b60bb14e1ef9109506720e84dfb990a427dcc0ce5
 
 name:           parsing-cw
 version:        0.1.0.0
@@ -27,7 +27,7 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Http
       Parser
   other-modules:
       Paths_parsing_cw
@@ -38,6 +38,7 @@ library
     , base >=4.7 && <5
     , bytestring
     , http-conduit
+    , text
   default-language: Haskell2010
 
 executable parsing-cw-exe
@@ -53,6 +54,7 @@ executable parsing-cw-exe
     , bytestring
     , http-conduit
     , parsing-cw
+    , text
   default-language: Haskell2010
 
 test-suite parsing-cw-test
@@ -69,4 +71,5 @@ test-suite parsing-cw-test
     , bytestring
     , http-conduit
     , parsing-cw
+    , text
   default-language: Haskell2010
