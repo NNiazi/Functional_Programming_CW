@@ -29,6 +29,7 @@ import Data.Aeson
   )
 import qualified Data.ByteString.Lazy.Char8 as L8
 import GHC.Generics (Generic)
+import Data.Time
 
 data TvShow = TvShow
   { showID :: Int,
@@ -78,8 +79,8 @@ data Season = Season
     seaShowID :: Int,
     seasonNum :: Int,
     numEpisodes :: Int,
-    startDate :: String,
-    endDate :: String
+    startDate :: Day,
+    endDate :: Day
   }
   deriving (Show, Generic)
 
@@ -108,7 +109,7 @@ data Episode = Episode
     episodeNum :: Int,
     episodeName :: String,
     episodeSummary :: String,
-    airDate :: String
+    airDate :: Day
   }
   deriving (Show, Generic)
 
