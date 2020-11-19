@@ -1,6 +1,6 @@
 module Database
   ( initialiseDB
-  , saveTvShows
+  , saveTvShow
   ) where
 
 import Database.HDBC
@@ -77,8 +77,8 @@ tvShowToSqlValues tvShow = [
 prepareInsertTvShowStmt :: Connection -> IO Statement
 prepareInsertTvShowStmt conn = prepare conn "INSERT INTO TvShow VALUES (?,?,?,?,?,?,?)"
 
-saveTvShows :: [TvShow] -> Connection -> IO ()
-saveTvShows tvShows conn = do
+saveTvShow :: TvShow -> Connection -> IO ()
+saveTvShow tvShow conn = do
   stmt <- prepareInsertTvShowStmt conn
-  executeMany stmt (map tvShowToSqlValues tvShows)
+  execute stmt (tvShowToSqlValues tvShow)
   commit conn

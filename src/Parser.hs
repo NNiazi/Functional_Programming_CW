@@ -12,7 +12,8 @@ module Parser
     updateCastId,
     getTvShowId,
     TvShow (showID, showName, language, runtime, premiered, url, showSummary),
-    TvShowFromSearch (show),
+    -- TvShows ( tvshows ),
+    TvShowFromSearch ( show ),
     Season (seasonID, seaShowID, seasonNum, numEpisodes, startDate, endDate),
     Episode (episodeID, epiShowID, epiSeasonID, episodeNum, episodeName, episodeSummary, airDate),
     Cast (castID, castShowID, actor, character),
@@ -60,6 +61,17 @@ instance FromJSON TvShow where
       <*> (v .: "officialSite")
       <*> (v .: "summary")
   parseJSON _ = mzero
+
+-- data TvShows = TvShows {
+--  tvshows :: [TvShow]
+-- } deriving (Show, Generic)
+
+-- instance FromJSON TvShows where
+--  parseJSON (Object v) =
+--    TvShows <$> (v.: "tvshows")
+--  parseJSON _ = mzero
+
+-- instance ToJSON TvShows
 
 getTvShowId :: TvShow -> Int
 getTvShowId tvShow = showID tvShow
