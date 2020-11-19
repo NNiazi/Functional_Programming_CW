@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b84c33b7dde12dd6b175ea6b5b28b7c25338aceca9220e70faebb6fdf2e55a78
+-- hash: 4db3b00fd7fb72ddc44262eac1a8cf50feb13e6e8fa062dca9530513eea87135
 
 name:           parsing-cw
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Database
       HTTP
       Parser
   other-modules:
@@ -34,7 +35,9 @@ library
   hs-source-dirs:
       src
   build-depends:
-      aeson
+      HDBC
+    , HDBC-sqlite3
+    , aeson
     , base
     , bytestring
     , http-conduit
@@ -50,7 +53,9 @@ executable parsing-cw-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aeson
+      HDBC
+    , HDBC-sqlite3
+    , aeson
     , base
     , bytestring
     , http-conduit
@@ -68,7 +73,9 @@ test-suite parsing-cw-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aeson
+      HDBC
+    , HDBC-sqlite3
+    , aeson
     , base
     , bytestring
     , http-conduit

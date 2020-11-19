@@ -11,7 +11,7 @@ module Parser
     updateEpisodeId,
     updateCastId,
     getTvShowId,
-    TvShow (showID, showName, language, runtime, premiered, genres, url, showSummary),
+    TvShow (showID, showName, language, runtime, premiered, url, showSummary),
     TvShowFromSearch (show),
     Season (seasonID, seaShowID, seasonNum, numEpisodes, startDate, endDate),
     Episode (episodeID, epiShowID, epiSeasonID, episodeNum, episodeName, episodeSummary, airDate),
@@ -36,8 +36,7 @@ data TvShow = TvShow
     showName :: String,
     language :: String,
     runtime :: Int,
-    premiered :: String,
-    genres :: [String],
+    premiered :: Day,
     url :: String,
     showSummary :: String
   }
@@ -58,7 +57,6 @@ instance FromJSON TvShow where
       <*> (v .: "language")
       <*> (v .: "runtime")
       <*> (v .: "premiered")
-      <*> (v .: "genres")
       <*> (v .: "officialSite")
       <*> (v .: "summary")
   parseJSON _ = mzero
