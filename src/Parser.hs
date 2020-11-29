@@ -11,8 +11,9 @@ module Parser
     updateEpisodeId,
     updateCastId,
     getTvShowId,
-    TvShow (showID, showName, language, runtime, premiered, genres, url, showSummary),
-    TvShowFromSearch (show),
+    TvShow (showID, showName, language, runtime, premiered, url, showSummary),
+    -- TvShows ( tvshows ),
+    TvShowFromSearch ( show ),
     Season (seasonID, seaShowID, seasonNum, numEpisodes, startDate, endDate),
     Episode (episodeID, epiShowID, epiSeasonID, episodeNum, episodeName, episodeSummary, airDate),
     Cast (castID, castShowID, actor, character),
@@ -29,14 +30,14 @@ import Data.Aeson
   )
 import qualified Data.ByteString.Lazy.Char8 as L8
 import GHC.Generics (Generic)
+import Data.Time
 
 data TvShow = TvShow
   { showID :: Int,
     showName :: String,
     language :: String,
     runtime :: Int,
-    premiered :: String,
-    genres :: [String],
+    premiered :: Day,
     url :: String,
     showSummary :: String
   }
@@ -57,10 +58,20 @@ instance FromJSON TvShow where
       <*> (v .: "language")
       <*> (v .: "runtime")
       <*> (v .: "premiered")
-      <*> (v .: "genres")
       <*> (v .: "officialSite")
       <*> (v .: "summary")
   parseJSON _ = mzero
+
+-- data TvShows = TvShows {
+--  tvshows :: [TvShow]
+-- } deriving (Show, Generic)
+
+-- instance FromJSON TvShows where
+--  parseJSON (Object v) =
+--    TvShows <$> (v.: "tvshows")
+--  parseJSON _ = mzero
+
+-- instance ToJSON TvShows
 
 getTvShowId :: TvShow -> Int
 getTvShowId tvShow = showID tvShow
@@ -78,8 +89,8 @@ data Season = Season
     seaShowID :: Int,
     seasonNum :: Int,
     numEpisodes :: Int,
-    startDate :: String,
-    endDate :: String
+    startDate :: Day,
+    endDate :: Day
   }
   deriving (Show, Generic)
 
@@ -108,7 +119,7 @@ data Episode = Episode
     episodeNum :: Int,
     episodeName :: String,
     episodeSummary :: String,
-    airDate :: String
+    airDate :: Day
   }
   deriving (Show, Generic)
 

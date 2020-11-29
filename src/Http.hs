@@ -1,4 +1,4 @@
-module Http 
+module HTTP 
   ( download
   ) where
 
