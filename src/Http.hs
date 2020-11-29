@@ -1,6 +1,7 @@
-module HTTP
-    ( download
-    ) where
+module HTTP 
+  ( download
+  ) where
+
 import qualified  Data.ByteString.Lazy.Char8 as L8
 import  Network.HTTP.Simple
 
